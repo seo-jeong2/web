@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.web0830.mapper.NoticeMapper">
+
+	<select id="selectNoticeList" parameterType="map"
+		resultType="com.gd.web0830.vo.Notice">
+		SELECT
+		*
+		FROM notice
+		<where>
+			<if test="searchWord != null">
+				notice_title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		<choose>
+			<when test="sort == 'desc'">
+				ORDER BY notice_no ASC
+			</when>
+			<when test="sort == 'desc'">
+				ORDER BY notice_no DESC
+			</when>
+			
+			
+			
+			
+		</choose>
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+
+	
+</mapper>
